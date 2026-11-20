@@ -1,0 +1,17 @@
+# Template for the private build configuration.
+#
+# Copy this file to `local.properties` (which is gitignored and must NEVER be
+# committed) and fill in your own value, or provide the value through one of the
+# other build-time sources described below. Leave it unset to build without a
+# bundled default server (the app then falls back to the normal "add server" UI).
+#
+# Supported sources, in order of precedence:
+#   1. Gradle property:  ./gradlew assembleDebug -Pdefault.server.address=https://host:port
+#                        (or a `default.server.address` entry in ~/.gradle/gradle.properties)
+#   2. Environment variable:  DEFAULT_SERVER_ADDRESS=https://host:port
+#   3. local.properties entry:  default.server.address=https://host:port
+#
+# The value is injected into BuildConfig at build time; no address is stored in
+# version-controlled sources.
+
+default.server.address=

@@ -327,7 +327,7 @@
     <string name="pref_theme_muted_purple">Приглушено лилаво</string>
     <string name="no_network_permissions">Jellyfin изисква мрежови права за да функционира</string>
     <string name="saved_servers">Запазени сървъри</string>
-    <string name="welcome_title">Добре дошли в Jellyfin!</string>
+    <string name="welcome_title">Добре дошли в Finplayer!</string>
     <string name="welcome_content">Свържете се със сървъра си, за да започнете.</string>
     <string name="no_user_warning">Не можахме да намерим акаунти!\nДобавете нов акаунт като натиснете върху бутона \"Добави Акаунт\".</string>
     <string name="who_is_watching">Кой гледа?</string>

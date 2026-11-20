@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.jellyfin.androidtv.R
+import org.jellyfin.androidtv.constant.ServerConstants
 import org.jellyfin.androidtv.auth.repository.AuthenticationRepository
 import org.jellyfin.androidtv.auth.repository.ServerRepository
 import org.jellyfin.androidtv.auth.repository.ServerUserRepository
@@ -58,7 +59,12 @@ fun SettingsAuthenticationServerScreen(serverId: UUID) {
 		item {
 			ListSection(
 				overlineContent = { Text(stringResource(R.string.pref_login).uppercase()) },
-				headingContent = { Text(server?.name.orEmpty()) },
+				headingContent = {
+					Text(
+						if (server?.address == ServerConstants.DEFAULT_SERVER_ADDRESS) stringResource(R.string.app_name_release)
+						else server?.name.orEmpty()
+					)
+				},
 				captionContent = { Text(server?.address.orEmpty()) },
 			)
 		}

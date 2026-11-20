@@ -81,6 +81,7 @@ class ServerFragment : Fragment() {
 					RequireSignInState -> navigateFragment<UserLoginFragment>(createBundle {
 						putString(UserLoginFragment.ARG_SERVER_ID, server.id.toString())
 						putString(UserLoginFragment.ARG_USERNAME, user.name)
+						putBoolean(UserLoginFragment.ARG_SKIP_QUICKCONNECT, true)
 					})
 					// Errors
 					ServerUnavailableState,
@@ -145,6 +146,7 @@ class ServerFragment : Fragment() {
 				args = createBundle {
 					putString(UserLoginFragment.ARG_SERVER_ID, server.id.toString())
 					putString(UserLoginFragment.ARG_USERNAME, null)
+					putBoolean(UserLoginFragment.ARG_SKIP_QUICKCONNECT, true)
 				}
 			)
 		}

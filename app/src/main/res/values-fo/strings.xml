@@ -193,7 +193,7 @@
     <string name="lbl_switch_user">Skift brúkara</string>
     <string name="no_network_permissions">Jellyfin tørvar netrættindir til tess at virka</string>
     <string name="saved_servers">Goymdir ambætarar</string>
-    <string name="welcome_title">Vælkomin til Jellyfin!</string>
+    <string name="welcome_title">Vælkomin til Finplayer!</string>
     <string name="welcome_content">Sambind við tín ambætara til tess at koma í gongd.</string>
     <string name="help">Hjálp</string>
     <string name="lbl_next_up_extended">Við smámynd</string>

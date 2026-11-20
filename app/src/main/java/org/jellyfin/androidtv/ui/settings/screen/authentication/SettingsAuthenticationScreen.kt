@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import org.jellyfin.androidtv.R
+import org.jellyfin.androidtv.constant.ServerConstants
 import org.jellyfin.androidtv.auth.repository.ServerRepository
 import org.jellyfin.androidtv.auth.repository.ServerUserRepository
 import org.jellyfin.androidtv.auth.store.AuthenticationPreferences
@@ -94,7 +95,12 @@ fun SettingsAuthenticationScreen(launchedFromLogin: Boolean = false) {
 			items(storedServers) { server ->
 				ListButton(
 					leadingContent = { Icon(painterResource(R.drawable.ic_house), contentDescription = null) },
-					headingContent = { Text(server.name) },
+					headingContent = {
+						Text(
+							if (server.address == ServerConstants.DEFAULT_SERVER_ADDRESS) stringResource(R.string.app_name_release)
+							else server.name
+						)
+					},
 					captionContent = { Text(server.address) },
 					onClick = {
 						router.push(
@@ -128,7 +134,7 @@ fun SettingsAuthenticationScreen(launchedFromLogin: Boolean = false) {
 
 		if (launchedFromLogin) item {
 			ListButton(
-				leadingContent = { Icon(painterResource(R.drawable.ic_jellyfin), contentDescription = null) },
+				leadingContent = { Icon(painterResource(R.drawable.ic_finplayer), contentDescription = null) },
 				headingContent = { Text(stringResource(R.string.pref_about_title)) },
 				onClick = { router.push(Routes.ABOUT, mapOf("fromLogin" to "true")) },
 				modifier = Modifier.focusKey(Routes.ABOUT)

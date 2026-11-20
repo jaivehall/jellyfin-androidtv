@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.jellyfin.androidtv.R
+import org.jellyfin.androidtv.constant.ServerConstants
 import org.jellyfin.androidtv.auth.model.UnavailableQuickConnectState
 import org.jellyfin.androidtv.data.service.BackgroundService
 import org.jellyfin.androidtv.databinding.FragmentUserLoginBinding
@@ -75,7 +76,13 @@ class UserLoginFragment : Fragment() {
 			viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
 				// Update "connecting to ..." text and background
 				userLoginViewModel.server.onEach { server ->
-					val name = server?.name ?: "Jellyfin"
+					// The built-in default server should show our localized brand name
+					// (zh: 飞影视界 / en: Finplayer) instead of a hard-coded English label.
+					val name = when {
+						server == null -> getString(R.string.app_name_release)
+						server.address == ServerConstants.DEFAULT_SERVER_ADDRESS -> getString(R.string.app_name_release)
+						else -> server.name
+					}
 					binding.subtitle.text = getString(R.string.login_connect_to, name)
 
 					if (server != null) backgroundService.setBackground(server)

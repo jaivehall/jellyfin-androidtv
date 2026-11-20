@@ -344,7 +344,7 @@
     <string name="no_network_permissions">Jellyfin 需要有網路權限先至行到</string>
     <string name="press_to_close">撳吓嚟閂咗佢</string>
     <string name="saved_servers">儲存咗嘅伺服器</string>
-    <string name="welcome_title">歡迎嚟到 Jellyfin！</string>
+    <string name="welcome_title">歡迎嚟到 Finplayer！</string>
     <string name="welcome_content">連線去你嘅伺服器嚟開始用啦。</string>
     <string name="no_user_warning">我哋搵唔到任何帳戶！\n撳「新增帳戶」掣嚟加個新帳戶。</string>
     <string name="who_is_watching">邊位睇緊？</string>

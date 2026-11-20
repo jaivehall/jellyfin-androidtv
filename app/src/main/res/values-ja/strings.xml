@@ -246,7 +246,7 @@
     <string name="add_user">アカウント追加</string>
     <string name="no_user_warning">アカウントが見つかりませんでした！\n「アカウント追加」ボタンを押して、新しいアカウントを追加してください。</string>
     <string name="welcome_content">サーバーに接続してはじめます。</string>
-    <string name="welcome_title">Jellyfin へようこそ!</string>
+    <string name="welcome_title">Finplayer へようこそ!</string>
     <string name="saved_servers">保存済みサーバー</string>
     <string name="press_to_close">押して閉じる</string>
     <string name="no_network_permissions">Jellyfin は機能するためにネットワーク権限を要求します</string>

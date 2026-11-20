@@ -7,3 +7,14 @@ local.properties
 .kotlin/
 build/
 captures/
+
+# --- Finplayer: local-only artifacts (must not be published) ---
+# Agent working notes; may contain private configuration
+/.workbuddy/
+# Build outputs: APK & mapping embed build-time configuration
+/app/release/
+/app/proprietary/
+# Machine-generated Gradle daemon JVM toolchain config
+/gradle/gradle-daemon-jvm.properties
+# Design source drafts & local render scripts (contain machine-local paths)
+/branding/

@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jellyfin.androidtv.R
+import org.jellyfin.androidtv.constant.ServerConstants
 import org.jellyfin.androidtv.auth.repository.SessionRepository
 import org.jellyfin.androidtv.auth.repository.SessionRepositoryState
 import org.jellyfin.androidtv.auth.repository.UserRepository
@@ -43,6 +44,7 @@ import org.jellyfin.androidtv.ui.startup.fragment.SelectServerFragment
 import org.jellyfin.androidtv.ui.startup.fragment.ServerFragment
 import org.jellyfin.androidtv.ui.startup.fragment.SplashFragment
 import org.jellyfin.androidtv.ui.startup.fragment.StartupToolbarFragment
+import org.jellyfin.androidtv.ui.startup.fragment.UserLoginFragment
 import org.jellyfin.androidtv.util.applyTheme
 import org.jellyfin.androidtv.util.createBundle
 import org.jellyfin.sdk.api.client.ApiClient
@@ -129,8 +131,8 @@ class StartupActivity : FragmentActivity() {
 				mediaManager.clearAudioQueue()
 
 				val server = startupViewModel.getLastServer()
-				if (server != null) showServer(server.id)
-				else showServerSelection()
+				if (server != null) showLogin(server.id)
+				else autoConnectDefaultServer()
 			}
 		}.launchIn(lifecycleScope)
 
@@ -207,9 +209,46 @@ class StartupActivity : FragmentActivity() {
 		)
 	}
 
+	/**
+	 * Show the credential login screen directly for a server, skipping the
+	 * user-picker and defaulting to username/password instead of QuickConnect.
+	 */
+	private fun showLogin(id: UUID) = supportFragmentManager.commit {
+		replace<StartupToolbarFragment>(R.id.content_view)
+		add<UserLoginFragment>(
+			R.id.content_view, null, createBundle {
+				putString(UserLoginFragment.ARG_SERVER_ID, id.toString())
+				putBoolean(UserLoginFragment.ARG_SKIP_QUICKCONNECT, true)
+			}
+		)
+	}
+
 	private fun showServerSelection() = supportFragmentManager.commit {
 		replace<StartupToolbarFragment>(R.id.content_view)
 		add<SelectServerFragment>(R.id.content_view)
+	}
+
+	/**
+	 * No server has been configured yet: register the built-in default server
+	 * locally and jump straight to its credential login screen. The full
+	 * discovery/scoring flow is intentionally skipped — it can be inconclusive
+	 * for self-signed certs or custom ports, and the device may have no network
+	 * yet. Network is only needed when the user actually signs in.
+	 */
+	private fun autoConnectDefaultServer() {
+		val address = ServerConstants.DEFAULT_SERVER_ADDRESS
+		// No default server configured (e.g. a clean public build): behave like
+		// upstream Jellyfin and let the user add a server manually.
+		if (address.isBlank()) {
+			showServerSelection()
+			return
+		}
+		Timber.i("Auto-connecting to default server $address")
+		showSplash()
+		lifecycleScope.launch {
+			val server = startupViewModel.addDefaultServer(address)
+			showLogin(server.id)
+		}
 	}
 
 	override fun onNewIntent(intent: Intent) {

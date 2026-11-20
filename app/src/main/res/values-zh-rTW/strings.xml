@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name_release">飛影視界</string>
+    <string name="app_name_debug">飛影視界 Debug</string>
     <string name="lbl_albums">專輯</string>
     <string name="lbl_artists">演出者</string>
     <string name="lbl_song">歌曲</string>
@@ -383,7 +385,7 @@
     <string name="no_user_warning">我們找不到任何帳號！
 \n按下「新增帳號」的按鈕以新增新帳號。</string>
     <string name="welcome_content">請連結至你的伺服器以開始使用。</string>
-    <string name="welcome_title">歡迎來到Jellyfin！</string>
+    <string name="welcome_title">歡迎來到飛影視界！</string>
     <string name="saved_servers">以儲存的伺服器</string>
     <string name="press_to_close">點擊以關閉</string>
     <string name="no_network_permissions">Jellyfin需要網路權限才能運作</string>
@@ -575,4 +577,5 @@
     <string name="preference_enable_pgs">直接播放 PGS 字幕</string>
     <string name="still_watching_label">你還在觀看嗎？</string>
     <string name="pref_subtitles_position">從底部偏移</string>
+    <string name="app_version_label">%1$s 版本</string>
 </resources>

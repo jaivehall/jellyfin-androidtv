@@ -51,14 +51,21 @@ fun SettingsPlaybackScreen() {
 					val iconDrawable = remember(context) {
 						externalAppRepository.getCurrentExternalPlayerApp(context)?.loadIcon(context.packageManager)
 					}
-					Image(
-						painter = if (iconDrawable == null) rememberAsyncImagePainter(R.mipmap.app_icon)
-						else rememberAsyncImagePainter(iconDrawable),
-						contentDescription = null,
-						modifier = Modifier
-							.size(24.dp)
-							.clip(LocalShapes.current.small)
-					)
+					if (iconDrawable == null) {
+						Image(
+							painter = painterResource(R.drawable.app_icon_list),
+							contentDescription = null,
+							modifier = Modifier.size(24.dp)
+						)
+					} else {
+						Image(
+							painter = rememberAsyncImagePainter(iconDrawable),
+							contentDescription = null,
+							modifier = Modifier
+								.size(24.dp)
+								.clip(LocalShapes.current.small)
+						)
+					}
 				},
 				onClick = { router.push(Routes.PLAYBACK_PLAYER) },
 				modifier = Modifier.focusKey(Routes.PLAYBACK_PLAYER)

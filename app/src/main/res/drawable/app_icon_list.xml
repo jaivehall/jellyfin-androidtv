@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 设置列表内使用的小尺寸 app 图标：自带 Mint 圆角底 + 水中倒影鳍形，
+     不依赖 adaptive-icon 遮罩，避免小尺寸下黑色图案被裁角。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#00E0A4"
+        android:pathData="M24,0H84A24,24 0 0,1 108,24V84A24,24 0 0,1 84,108H24A24,24 0 0,1 0,84V24A24,24 0 0,1 24,0Z" />
+    <group
+        android:scaleX="0.307"
+        android:scaleY="0.307"
+        android:translateX="14.7"
+        android:translateY="14.7">
+        <group>
+            <clip-path android:pathData="M50,40 Q140,40 206,128 Q140,216 50,216 Q90,128 50,40 Z" />
+        <path android:fillColor="#0C1417" android:pathData="M0,0 H256 V128 H0 Z" />
+        <path android:fillColor="#890C1417" android:pathData="M0,128.00 H256 V132.40 H0 Z" />
+        <path android:fillColor="#820C1417" android:pathData="M0,132.40 H256 V136.80 H0 Z" />
+        <path android:fillColor="#7B0C1417" android:pathData="M0,136.80 H256 V141.20 H0 Z" />
+        <path android:fillColor="#740C1417" android:pathData="M0,141.20 H256 V145.60 H0 Z" />
+        <path android:fillColor="#6D0C1417" android:pathData="M0,145.60 H256 V150.00 H0 Z" />
+        <path android:fillColor="#660C1417" android:pathData="M0,150.00 H256 V154.40 H0 Z" />
+        <path android:fillColor="#5F0C1417" android:pathData="M0,154.40 H256 V158.80 H0 Z" />
+        <path android:fillColor="#580C1417" android:pathData="M0,158.80 H256 V163.20 H0 Z" />
+        <path android:fillColor="#510C1417" android:pathData="M0,163.20 H256 V167.60 H0 Z" />
+        <path android:fillColor="#4A0C1417" android:pathData="M0,167.60 H256 V172.00 H0 Z" />
+        <path android:fillColor="#430C1417" android:pathData="M0,172.00 H256 V176.40 H0 Z" />
+        <path android:fillColor="#3C0C1417" android:pathData="M0,176.40 H256 V180.80 H0 Z" />
+        <path android:fillColor="#350C1417" android:pathData="M0,180.80 H256 V185.20 H0 Z" />
+        <path android:fillColor="#2E0C1417" android:pathData="M0,185.20 H256 V189.60 H0 Z" />
+        <path android:fillColor="#270C1417" android:pathData="M0,189.60 H256 V194.00 H0 Z" />
+        <path android:fillColor="#200C1417" android:pathData="M0,194.00 H256 V198.40 H0 Z" />
+        <path android:fillColor="#190C1417" android:pathData="M0,198.40 H256 V202.80 H0 Z" />
+        <path android:fillColor="#120C1417" android:pathData="M0,202.80 H256 V207.20 H0 Z" />
+        <path android:fillColor="#0B0C1417" android:pathData="M0,207.20 H256 V211.60 H0 Z" />
+        <path android:fillColor="#040C1417" android:pathData="M0,211.60 H256 V216.00 H0 Z" />
+        <path android:fillColor="#80FFFFFF" android:pathData="M0,127 H256 V128.6 H0 Z" />
+        </group>
+    </group>
+</vector>

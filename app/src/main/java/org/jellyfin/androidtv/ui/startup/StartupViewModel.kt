@@ -60,6 +60,8 @@ class StartupViewModel(
 
 	fun addServer(address: String) = serverRepository.addServer(address)
 
+	suspend fun addDefaultServer(address: String) = serverRepository.addDefaultServer(address)
+
 	fun deleteServer(serverId: UUID) {
 		viewModelScope.launch { serverRepository.deleteServer(serverId) }
 	}

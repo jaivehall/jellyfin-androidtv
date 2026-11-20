@@ -137,22 +137,22 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		/**
 		 * AC3 bitstream device profile override.
 		 */
-		var bitstreamAc3 = enumPreference("bitstream_ac3_mode", BitstreamAudioMode.AUTO)
+		var bitstreamAc3 = enumPreference("bitstream_ac3_mode", BitstreamAudioMode.ENABLE)
 
 		/**
 		 * EAC3 bitstream device profile override.
 		 */
-		var bitstreamEac3 = enumPreference("bitstream_eac3_mode", BitstreamAudioMode.AUTO)
+		var bitstreamEac3 = enumPreference("bitstream_eac3_mode", BitstreamAudioMode.ENABLE)
 
 		/**
 		 * DTS bitstream device profile override.
 		 */
-		var bitstreamDts = enumPreference("bitstream_dts_mode", BitstreamAudioMode.AUTO)
+		var bitstreamDts = enumPreference("bitstream_dts_mode", BitstreamAudioMode.ENABLE)
 
 		/**
 		 * TrueHD bitstream device profile override.
 		 */
-		var bitstreamTrueHd = enumPreference("bitstream_truehd_mode", BitstreamAudioMode.AUTO)
+		var bitstreamTrueHd = enumPreference("bitstream_truehd_mode", BitstreamAudioMode.ENABLE)
 
 		/**
 		 * HDR10 device profile override.
@@ -291,7 +291,7 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		/**
 		 * Enable libass.
 		 */
-		var assDirectPlay = booleanPreference("libass_enabled", false)
+		var assDirectPlay = booleanPreference("libass_enabled", true)
 
 		/**
 		 * Always burn in subtitles when transcoding.

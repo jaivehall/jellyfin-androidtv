@@ -369,7 +369,7 @@
     <string name="no_network_permissions">Jellyfin จำเป็นต้องได้รับอนุญาตสิทธิ์เครือข่ายเพื่อทำงาน</string>
     <string name="press_to_close">กดเพื่อปิด</string>
     <string name="saved_servers">เซิร์ฟเวอร์ที่บันทึกไว้</string>
-    <string name="welcome_title">ยินดีต้อนรับสู่ Jellyfin!</string>
+    <string name="welcome_title">ยินดีต้อนรับสู่ Finplayer!</string>
     <string name="welcome_content">เชื่อมต่อกับเซิร์ฟเวอร์ของคุณเพื่อเริ่มใช้งาน</string>
     <string name="no_user_warning">ไม่พบบัญชีใดๆ!\nเพิ่มบัญชีใหม่โดยกดปุ่ม \"เพิ่มบัญชี\"</string>
     <string name="who_is_watching">ใครกำลังรับชมอยู่?</string>

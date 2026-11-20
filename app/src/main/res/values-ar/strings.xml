@@ -274,7 +274,7 @@
     <string name="who_is_watching">مَن يُشاهد؟</string>
     <string name="no_user_warning">لم نتمكن من العثور على أي حسابات!\nأضف حسابًا جديدًا بالضغط على زر \"إضافة حساب\".</string>
     <string name="welcome_content">اتصل بخادمك للبدء.</string>
-    <string name="welcome_title">مرحبًا بك في Jellyfin!</string>
+    <string name="welcome_title">مرحبًا بك في Finplayer!</string>
     <string name="saved_servers">الخوادم المحفوظة</string>
     <string name="press_to_close">اضغط للإغلاق</string>
     <string name="no_network_permissions">يتطلب Jellyfin أذونات الشبكة ليعمل</string>

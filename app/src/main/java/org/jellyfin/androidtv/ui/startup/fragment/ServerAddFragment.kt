@@ -16,6 +16,7 @@ import org.jellyfin.androidtv.R
 import org.jellyfin.androidtv.auth.model.ConnectedState
 import org.jellyfin.androidtv.auth.model.ConnectingState
 import org.jellyfin.androidtv.auth.model.UnableToConnectState
+import org.jellyfin.androidtv.constant.ServerConstants
 import org.jellyfin.androidtv.databinding.FragmentServerAddBinding
 import org.jellyfin.androidtv.ui.startup.ServerAddViewModel
 import org.jellyfin.androidtv.util.createBundle
@@ -59,12 +60,22 @@ class ServerAddFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		if (serverAddressArgument != null) {
-			binding.address.setText(serverAddressArgument)
+		val address = serverAddressArgument
+		if (address != null) {
+			// Explicit address supplied (e.g. deep link): pre-fill and connect.
+			binding.address.setText(address)
 			binding.address.isEnabled = false
 			submitAddress()
 		} else {
-			binding.address.requestFocus()
+			// No address supplied: use the configured default (if any).
+			val defaultAddress = ServerConstants.DEFAULT_SERVER_ADDRESS
+			binding.address.setText(defaultAddress)
+			if (defaultAddress.isNotBlank() && ServerConstants.AUTO_CONNECT_DEFAULT_SERVER) {
+				binding.address.isEnabled = false
+				submitAddress()
+			} else {
+				binding.address.requestFocus()
+			}
 		}
 
 		startupViewModel.state.onEach { state ->

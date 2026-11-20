@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
@@ -56,11 +57,9 @@ fun SettingsPlaybackPlayerScreen() {
 			ListButton(
 				leadingContent = {
 					Image(
-						painter = rememberAsyncImagePainter(R.mipmap.app_icon),
+						painter = painterResource(R.drawable.app_icon_list),
 						contentDescription = null,
-						modifier = Modifier
-							.size(32.dp)
-							.clip(LocalShapes.current.small)
+						modifier = Modifier.size(32.dp)
 					)
 				},
 				headingContent = { Text(stringResource(R.string.app_name)) },

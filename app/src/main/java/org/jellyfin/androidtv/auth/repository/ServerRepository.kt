@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
+import android.content.Context
+import org.jellyfin.androidtv.R
 import org.jellyfin.androidtv.auth.model.AuthenticationStoreServer
 import org.jellyfin.androidtv.auth.model.ConnectedState
 import org.jellyfin.androidtv.auth.model.ConnectingState
@@ -47,6 +50,16 @@ interface ServerRepository {
 	fun setCurrentServer(server: Server?)
 
 	fun addServer(address: String): Flow<ServerAdditionState>
+
+	/**
+	 * Register a server directly from a known address without running the full
+	 * discovery/scoring flow. Used for the built-in default server so first run
+	 * goes straight to the login screen even when discovery is inconclusive
+	 * (self-signed certificate, custom port) or the device has no network yet.
+	 * Network is only needed later, when the user actually signs in.
+	 */
+	suspend fun addDefaultServer(address: String): Server
+
 	suspend fun getServer(id: UUID, eagerUpdate: Boolean = false): Server?
 	suspend fun updateServer(server: Server, force: Boolean = false): Boolean
 	suspend fun deleteServer(server: UUID): Boolean
@@ -62,6 +75,7 @@ interface ServerRepository {
 class ServerRepositoryImpl(
 	private val jellyfin: Jellyfin,
 	private val authenticationStore: AuthenticationStore,
+	private val context: Context,
 ) : ServerRepository {
 	// State
 	private val _storedServers = MutableStateFlow(emptyList<Server>())
@@ -174,6 +188,39 @@ class ServerRepositoryImpl(
 			emit(UnableToConnectState(addressCandidatesWithIssues))
 		}
 	}.flowOn(Dispatchers.IO)
+
+	override suspend fun addDefaultServer(address: String): Server = withContext(Dispatchers.IO) {
+		// Use the localized app name as the default server's display name so the login
+		// subtitle ("Connecting to ...") shows our brand name in the system language.
+		val displayName = context.getString(R.string.app_name_release)
+		// Try to obtain the real server id/name cheaply; fall back to a stable derived
+		// id when offline so first-run can still reach the login screen.
+		val info = try {
+			withTimeout(2_000) {
+				val api = jellyfin.createApi(address)
+				val publicInfo by api.systemApi.getPublicSystemInfo()
+				publicInfo
+			}
+		} catch (e: Exception) {
+			Timber.w(e, "Unable to fetch public info for default server")
+			null
+		}
+
+		val serverId = info?.id?.toUUID() ?: UUID.nameUUIDFromBytes(address.toByteArray())
+		val existing = authenticationStore.getServer(serverId)
+		val storeServer = (existing ?: AuthenticationStoreServer(
+			name = displayName,
+			address = address,
+			setupCompleted = true,
+		)).copy(
+			address = address,
+			name = displayName,
+			version = info?.version ?: existing?.version,
+		)
+		authenticationStore.putServer(serverId, storeServer)
+		loadStoredServers()
+		storeServer.asServer(serverId)
+	}
 
 	override suspend fun getServer(id: UUID, eagerUpdate: Boolean): Server? {
 		val server = authenticationStore.getServer(id) ?: return null
