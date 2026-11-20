@@ -1,5 +1,7 @@
 # Changelog
 
+**English** | [简体中文](CHANGELOG.zh-CN.md)
+
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
@@ -8,25 +10,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- **Finplayer TV 品牌化**：应用显示名改为 `Finplayer` / `飞影视界` / `飛影視界`，随系统语言自适应；`applicationId` 改为 `com.finplayer.androidtv`。
-- **全新品牌视觉**：Mint `#00E0A4` + Ink `#0C1417` 配色、鳍形播放符号；桌面图标、横版 banner、应用内 logo、Splash、设置菜单图标、单色图标全套替换，并提供简 / 繁 / 英多语言矢量字标。
-- **水中倒影风格 logo**：桌面 launcher、设置菜单项、登录页标题、Splash 统一改为「上半实体 + 下半渐隐倒影 + 水面高光」；VectorDrawable 用 20 段递减 alpha 水平切片模拟渐变（原生不支持渐变填充）。
-- **默认服务器地址构建期注入**：地址不再硬编码在源码，改为构建期由 `local.properties` / 环境变量 / Gradle 属性注入 `BuildConfig`；新增不含真实地址的 `local.properties.example` 模板。未配置时为空串并回退原生「添加服务器」流程，干净 clone 仍可编译。
-- **首次启动直达登录页**：未登录时自动登记默认服务器并直接进入用户名密码登录页，跳过 QuickConnect；登记过程不依赖网络发现评分，网络只在真正认证时才需要。
-- **播放偏好默认值**：ASS / PGS 字幕默认直接播放；AC3 / EAC3 / DTS / TrueHD 默认开启比特流透传。
+- **Finplayer TV branding**: the display name is now `Finplayer` / `飞影视界` / `飛影視界`, following the system language. `applicationId` changed to `com.finplayer.androidtv`.
+- **New brand identity**: Mint `#00E0A4` + Ink `#0C1417` palette with a fin-shaped play mark. Launcher icon, landscape banner, in-app logo, splash, settings menu icons and monochrome icons are all replaced, with Simplified Chinese / Traditional Chinese / English vector wordmarks.
+- **"Underwater reflection" logo style**: launcher icon, settings menu entries, login page title and splash now share the same treatment — a solid upper half, a fading reflection below, and a waterline highlight. VectorDrawable does not support gradient fills, so the fade is simulated with 20 horizontal slices of decreasing alpha.
+- **Build-time injection of the default server address**: the address is no longer hard-coded. It is injected into `BuildConfig` at build time from `local.properties`, an environment variable, or a Gradle property, and a `local.properties.example` template without the real address is provided. When unset the value is an empty string and the app falls back to the native "Add server" flow, so a clean clone still compiles.
+- **First launch goes straight to login**: when signed out, the default server is registered automatically and the username/password login page opens directly, skipping QuickConnect. Registration no longer depends on network discovery scoring; network access is only required for the actual authentication.
+- **Default playback preferences**: ASS / PGS subtitles direct-play by default; AC3 / EAC3 / DTS / TrueHD bitstream passthrough is enabled by default.
 
 ### Fixed
 
-- 暗色背景下 logo 字标不可见：应用为固定深色主题，字标统一改为白色，不跟随系统明暗切换。
-- 中文系统残留英文：欢迎语、登录页副标题、设置页「管理服务器」、关于页版本标题与 caption 全部本地化，并对已存的旧英文服务器记录做显示层兜底（无需清除 App 数据）。
-- 中文系统 logo 字标仍为英文：新增 `drawable-zh-rCN` / `drawable-zh-rTW` 中文矢量字标，横版 logo、banner、Splash 均按 locale 自动切换。
-- 设置页播放相关图标被 adaptive-icon 圆形遮罩切角：新增普通 vector `app_icon_list` 替代 `R.mipmap.app_icon` 并去掉二次 clip；外部播放器仍显示真实应用图标。
-- 桌面 banner / 横版 logo 字标未垂直居中：按字标 bbox 中心重算 `translateY`，并补齐中英文密度限定符资源。
-- release 全量编译报 `Expecting a top level declaration`：删除 `ServerConstants.kt` 末尾残留字符。
+- Invisible wordmark on dark backgrounds: the app uses a fixed dark theme, so wordmarks are now always white instead of following the system light/dark setting.
+- English leftovers on Chinese-locale devices: the welcome text, login subtitle, the "Manage servers" settings entry, and the About page version title and caption are all localized. Server records already saved with the old English name are masked at the display layer, so clearing app data is not required.
+- Wordmark still in English on Chinese-locale devices: added `drawable-zh-rCN` / `drawable-zh-rTW` Chinese vector wordmarks; the landscape logo, banner and splash switch automatically by locale.
+- Playback icons in Settings clipped by the adaptive-icon circular mask: added a plain vector `app_icon_list` instead of `R.mipmap.app_icon` and dropped the extra clip. The external player entry still shows the real app icon.
+- Banner / landscape logo wordmark not vertically centered: `translateY` is recalculated from the wordmark bounding-box center, and the density-qualified Chinese and English assets are now complete.
+- Full release build failed with `Expecting a top level declaration`: removed a stray character at the end of `ServerConstants.kt`.
 
 ### Changed
 
-- 版本号统一由 `gradle.properties` 的 `jellyfin.version` 管理（`1.0.2`）。
-- 50+ 语言 `strings.xml` 批量替换品牌文案，清理 Jellyfin 字样。
-- 关于页 / 设置页图标引用改为自有 `ic_finplayer`，caption 改为 `finplayer-androidtv`。
-- `.gitignore` 增加本地工作数据与构建产物规则，避免将含私有信息的文件提交到公开仓库。
+- The version is managed by `jellyfin.version` in `gradle.properties` (`1.0.2`).
+- Brand strings replaced across 50+ language `strings.xml` files; all remaining Jellyfin wording cleaned up.
+- About and Settings icons now reference the project's own `ic_finplayer`; the caption changed to `finplayer-androidtv`.
+- `.gitignore` gained rules for local work data and build outputs, so files containing private information are never committed to the public repository.
